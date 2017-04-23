@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/css/material-icons.css">
+  <link rel="stylesheet" href="/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/application.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(document).on('click', '#crashButton', function (event) {
+        event.preventDefault();
+
+        $.ajax({
+          url: '/crash',
+          type: 'get',
+          done: function () {
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div calss="navbar-fixed">
+    <nav class="nav-extended blue">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">&nbsp Dell EMC World</a>
+      </div>
+      <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+          <li class="tab"><a href="#all">demo</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div id="demo">
+    <div class="center-align" style="margin-top: 10em;">
+      <a id="crashButton" class="waves-effect btn-large blue">Crash</a>
+    </div>
+  </div>
+</body>
+</html>
