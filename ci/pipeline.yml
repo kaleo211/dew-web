@@ -1,0 +1,52 @@
+groups:
+- name: dew-web
+  jobs:
+  - integration
+  - push
+
+jobs:
+- name: integration
+  serial: true
+  plan:
+  - aggregate:
+    - get: dew-web
+      trigger: true
+  - task: integration
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: kaleo211/dew-web}
+      inputs:
+      - name: dew-web
+      run:
+        path: dew-web/ci/tasks/integration.sh
+
+- name: push
+  serial: true
+  plan:
+  - aggregate:
+    - get: dew-web
+      passed: [integration]
+      trigger: true
+  - task: push
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: kaleo211/dew-web}
+      imputs:
+      - name: dew-web
+      run:
+        path: dew-web/ci/tasks/push.sh
+      params:
+        CF_USERNAME: {{cf_username}}
+        CF_PASSWORD: {{cf_password}}
+        CF_ENDPOINT: {{cf_endpoint}}
+
+resources:
+- name: dew-web
+  type: git
+  source: 
+    uri: git@github.com:kaleo211/dew-web.git
+    private_key: {{github_dew-web_private_key}}
