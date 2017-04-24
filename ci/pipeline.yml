@@ -48,5 +48,6 @@ resources:
 - name: dew-web
   type: git
   source: 
-    uri: git@github.com:kaleo211/dew-web.git
-    private_key: {{github_dew-web_private_key}}
+    uri: https://github.com/kaleo211/dew-web
+    username: {{github_username}}
+    password: {{github_password}}
