@@ -1,15 +1,13 @@
 var supertest = require('supertest');
 var expect = require('chai').expect;
 
-var server = supertest.agent("http://localhost:3000");
+var server = require('../server');
 
-describe('when click the crash button', function() {
-  it('should crash website', function(done) {
-    server
-      .get('/crash')
-      .end(function(err, res) {
-        expect(err.message).to.contain('ECONNREFUSED: Connection refused');
-        done();
-      });
+describe('when visit website', function() {
+  it('should return 200', function(done) {
+    supertest(server)
+      .get('/')
+      .expect(200)
+      .end(done());
   });
 });

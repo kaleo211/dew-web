@@ -12,6 +12,8 @@ app.use('/', router);
 app.use(express.static(__dirname + '/public'));
 
 
-app.listen(process.env.PORT, function () {
-  console.log('Beulah is listening on port 3000!');
+var server = app.listen(process.env.PORT, function () {
+  console.log('Beulah is listening on port ', process.env.PORT);
 });
+
+module.exports = server;
