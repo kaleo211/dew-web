@@ -16,7 +16,13 @@
         event.preventDefault();
         $.ajax({
           url: '/crash',
-          type: 'get'
+          type: 'get',
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log('crashed');
+          },
+          success: function(data) {
+            console.log('success');
+          }
         });
         location.reload();
       });
@@ -43,8 +49,12 @@
       <li>
         <img src="/image/dew-bg.jpg">
         <div class="caption center-align">
-          <h1><br><br><br></h1>
-          <a id="crashButton" style="cursor: pointer;"><i class="large material-icons" style="color: white;">help</i></a>
+          <h1><br><br><%= instanceId %><br></h1>
+          <a id="crashButton" style="cursor: pointer;">
+            <i class="large material-icons" style="color: white;">
+              help
+            </i>
+          </a>
         </div>
       </li>
     </ul>

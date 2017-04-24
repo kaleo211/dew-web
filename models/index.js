@@ -19,9 +19,8 @@ console.log(
 var sequelize = new Sequelize(cred['name'], cred['username'], cred['password'], {
   host: cred['hostname'],
   pool: {
-    max: 4,
-    min: 0,
-    maxIdleTime: 120000
+    max: 1,
+    min: 0
   },
   port: cred['port'],
   dialect: 'mysql',
