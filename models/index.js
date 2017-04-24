@@ -2,12 +2,28 @@ var Sequelize = require('sequelize');
 var fs = require('fs')
 var path = require('path')
 
-var sequelize = new Sequelize(
-  process.env.DEW_MYSQL_DATABASE,
-  process.env.DEW_MYSQL_USER,
-  process.env.DEW_MYSQL_PASSWORD, {
-  host: process.env.DEW_MYSQL_HOST,
-  port: 3306,
+var vcap = JSON.parse(process.env.VCAP_SERVICES)
+if (!vcap['cleardb']) {
+  process.exit(1);
+}
+var cred = vcap['cleardb'][0]['credentials']
+
+console.log(
+  cred['name'],
+  cred['username'],
+  cred['password'],
+  cred['hostname'],
+  cred['port']
+)
+
+var sequelize = new Sequelize(cred['name'], cred['username'], cred['password'], {
+  host: cred['hostname'],
+  pool: {
+    max: 4,
+    min: 0,
+    maxIdleTime: 120000
+  },
+  port: cred['port'],
   dialect: 'mysql',
   define: {
     timestamps: false

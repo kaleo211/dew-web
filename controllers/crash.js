@@ -18,11 +18,11 @@ var add = function (ip, device, browser, date) {
   }).then(function (crash) {
     return crash.get({ plain: true });
   });
-}
+};
 
 var crash = {
   get,
   add
-}
+};
 
-module.exports = crash
+module.exports = crash;

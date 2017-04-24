@@ -8,38 +8,46 @@
   <script type="text/javascript" src="/js/materialize.min.js"></script>
   <script>
     $(document).ready(function () {
+      $('.slider').slider({
+        indicators: false
+      });
+
       $(document).on('click', '#crashButton', function (event) {
         event.preventDefault();
-
         $.ajax({
           url: '/crash',
-          type: 'get',
-          done: function () {
-          }
+          type: 'get'
         });
+        location.reload();
       });
     });
   </script>
 </head>
 
 <body>
-  <div calss="navbar-fixed">
-    <nav class="nav-extended blue">
+  <div calss="navbar-fixed" style="z-index:10000;position:relative;">
+    <nav class="nav-extended black">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">&nbsp Dell EMC World</a>
+        <a href="#" class="brand-logo" style="margin-top:0.5em;margin-left:1em;">
+          <img src="/image/dew-logo.png">
+        </a>
       </div>
       <div class="nav-content">
-        <ul class="tabs tabs-transparent">
-          <li class="tab"><a href="#all">demo</a></li>
-        </ul>
+        <span class="nav-title"></span>
       </div>
     </nav>
   </div>
 
-  <div id="demo">
-    <div class="center-align" style="margin-top: 10em;">
-      <a id="crashButton" class="waves-effect btn-large blue">Crash</a>
-    </div>
+  <div class="slider fullscreen">
+    <ul class="slides">
+      <li>
+        <img src="/image/dew-bg.jpg">
+        <div class="caption center-align">
+          <h1><br><br><br></h1>
+          <a id="crashButton" style="cursor: pointer;"><i class="large material-icons" style="color: white;">help</i></a>
+        </div>
+      </li>
+    </ul>
   </div>
 </body>
 </html>
