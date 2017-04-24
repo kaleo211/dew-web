@@ -3,7 +3,7 @@
 set -e -x
 
 pushd dew-web
-  npm install --only=dev
+  npm install
   PORT=3000 npm start
   npm test
 pop
