@@ -1,3 +1,4 @@
 ---
 applications:
-- name: dew-web
+- name: rose
+  buildpack: nodejs_buildpack
